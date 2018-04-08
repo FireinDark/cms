@@ -265,7 +265,9 @@ def register(request):
         password2 = request.POST.get('password2')
         profile = request.POST.get('profile')
         avatar = request.FILES.get('avatar')
-        print username,email,password1,password2,profile,avatar
+        # print username,email,password1,password2,profile,avatar
+        if not avatar:
+            return render(request, 'register.html', {'form': form, 'msg':'请上传您的头像！'})
         res = upload_avatar(avatar)
         try:
                 # print request.POST.get('raw_username', '')
@@ -401,6 +403,7 @@ def user_detail(request):
 #             return render(request, 'create_article.html', {'column_list': column_list, 'msg': '服务器繁忙，文章保存失败！'})
 
 
+# 发表文章
 @login_required
 def create_article(request):
     column_list = Column.objects.all()

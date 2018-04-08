@@ -3,14 +3,14 @@
 
 <html lang="zh-CN">
 <head>
-{#    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">#}
+    {#    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">#}
     <meta charset="utf-8">
-{#    <meta http-equiv="X-UA-Compatible" content="IE=edge">#}
+    {#    <meta http-equiv="X-UA-Compatible" content="IE=edge">#}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="description" content="">
     <meta name="author" content="">
-{#    <link rel="icon" href="https://v3.bootcss.com/favicon.ico">#}
+    {#    <link rel="icon" href="https://v3.bootcss.com/favicon.ico">#}
 
     <title>用户注册</title>
 
@@ -22,46 +22,53 @@
 
     <script type="text/javascript" src="{% static 'js/ie-emulation-modes-warning.js' %}"></script>
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{% static 'css/signin.css' %}">
-
+    {#    <link rel="stylesheet" href="{% static 'css/signin.css' %}">#}
 
 
 </head>
 
 <body>
 
-<div class="container">
+{#<div class="container">#}
+    <div class="row" style="background-color: whitesmoke; height: 100%;position: fixed;width: 100%; overflow: hidden">
+        <div class="col-sm-6 col-sm-offset-3" style="border: solid 5px white; top: 10%; border-radius: 5px;">
+            <div class="row">
+                <div class="col-xs-12 form center-block">
+                    <form action="{% url 'fire:register' %}" class="form-signin" method="post"
+                          enctype="multipart/form-data">
+                        <h2 class="form-signin-heading">{{ form.non_field_errors }}</h2>
+                        <h2 class="form-signin-heading" style="color: red">{{ msg }}</h2>
 
-    <form action="{% url 'fire:register' %}" class="form-signin" method="post" enctype="multipart/form-data">
-        <h2 class="form-signin-heading">{{ form.non_field_errors }}</h2>
-        <h2 class="form-signin-heading" style="color: red">{{ msg }}</h2>
+                        <label>用户名</label>
+                        {{ form.username }}
 
-             <label >用户名</label>
-            {{ form.username }}
+                        <label>头像</label>
+                        {{ form.avatar }}
 
-            <label>头像</label>
-            {{ form.avatar }}
+                        <label>个人简介</label>
+                        {{ form.profile }}
 
-            <label>个人简介</label>
-            {{ form.profile }}
+                        <label>密码</label>
+                        {{ form.password1 }}
 
-             <label>密码</label>
-            {{ form.password1 }}
+                        <label>密码确认</label>
+                        {{ form.password2 }}
 
-             <label>密码确认</label>
-            {{ form.password2 }}
+                        <label>邮箱</label>
+                        {{ form.email }}
+                        {% csrf_token %}
 
-             <label>邮箱</label>
-            {{ form.email }}
-             {% csrf_token %}
-
-{#        <label for="inputPhone">电话</label>#}
-{#        <input name="phone" type="text" id="inputPhone" class="form-control" placeholder="电话">#}
-
-        <button class="btn btn-lg btn-info btn-block" type="submit">注册</button>
-    </form>
-
-</div> <!-- /container -->
+                        {#        <label for="inputPhone">电话</label>#}
+                        {#        <input name="phone" type="text" id="inputPhone" class="form-control" placeholder="电话">#}
+                        <br>
+                        <button class="btn btn-lg btn-info btn-block" type="submit">注册</button>
+                        <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{#</div> <!-- /container -->#}
 {##}
 {#<script type="text/javascript">#}
 {#    $(function () {#}
