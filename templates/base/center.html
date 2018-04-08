@@ -1,0 +1,29 @@
+<div class="col-sm-6">
+
+<!-- Alert -->
+{#<div class="alert alert-success alert-dismissible" role="alert">#}
+{#    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>#}
+{#    <strong>Synergize:</strong> Seamlessly visualize quality intellectual capital!#}
+{#</div>#}
+
+<!-- Articles -->
+    {% for article in latest_article_list %}
+    <div class="row">
+        <article class="col-xs-12">
+            <h4><a id="article_title" href="/fire/{{ article.id }}">{{ article.title }}</a> </h4>
+            {# 显示文章内容前80个字符，已经审核过 #}
+    {#        <p>{{ article.content|truncatechars_html:80 | safe }}</p>#}
+    {#					<p><button class="btn btn-default">Read More</button></p>#}
+            <p class="pull-right"><span class="label label-default">{{ article.column }}</span> <span class="label label-default">{{ article.author }}</span></p>
+            <ul class="list-inline">
+                <li><a href="#">{{ article.pub_date | date:"j M" }}</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-comment"></span> {{ article.comment_num }} 评论</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-share"></span> {{ article.keep_num }} 收藏</a></li>
+            </ul>
+        </article>
+    </div>
+    <hr>
+{% endfor %}
+    {% include 'base/cut_page.html'  %}
+<hr>
+</div><!--/Center Column-->
