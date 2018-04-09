@@ -69,6 +69,8 @@ def index(request):
         'pn': pn,
         'temp_list':article_list
     }
+    for a in article_list:
+        print a.comment_num
     return render(request,'index.html', context)
 
 # 搜索文章
@@ -151,7 +153,7 @@ def log_in(request):
             if user is not None:
                 login(request,user)
                 url = request.POST.get('source_url', '/fire')
-                return  redirect(url)
+                return redirect(url)
             else:
                 return render(request, 'login.html', {'form':form, 'error':'password or username is not true!'})
         else:
@@ -199,6 +201,7 @@ def comment(request, article_id):
         c.user = user
         c.save()
         article.comment_num += 1
+        article.save()
     return redirect(url)
 
 # 文章收藏
