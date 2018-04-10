@@ -338,12 +338,14 @@ def get_column(request, column_id):
     column = get_object_or_404(Column, id=column_id)
     article_list = column.article_set.all()
     pn = request.GET.get('pn', 1)
+    column_list = Column.objects.all()
     temp_list, number_pages, number, pn = cut_page(pn, article_list)
     context = {
         'temp_list': temp_list,
         'numbers': number,
         'num_pages': number_pages,
         'pn': pn,
+        'column_list': column_list,
     }
     return render(request, 'column_article.html', context)
 
