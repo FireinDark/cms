@@ -82,13 +82,15 @@ def search(request):
         pn = request.GET.get('pn', 1)
         article_list, number_pages, number, pn = cut_page(pn, article_list)
         # return HttpResponse('OK')
+        column_list = Column.objects.all()
         context = {
             'article_list': article_list,
             'numbers': number,
             'num_pages': number_pages,
             'pn': pn,
             'temp_list':article_list,
-        }
+            'column_list': column_list
+	}
         if article_list:
             return render(request,'column_article.html', context)
         else:
@@ -179,14 +181,15 @@ def article(request, article_id):
     commentform = CommentForm()
     loginform = LoginForm()
     comments = article.comment_set.all()
-
+    column_list = Column.objects.all()
     return render(request, 'article_page.html',{
         'article':article,
         'loginform':loginform,
         'commentform':commentform,
         'content':content,
         'comments':comments,
-    })
+        'column_list': column_list
+	})
 
 # 文章评论
 @login_required
