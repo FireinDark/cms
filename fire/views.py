@@ -88,19 +88,19 @@ def search(request):
             'numbers': number,
             'num_pages': number_pages,
             'pn': pn,
-            'temp_list':article_list,
+            'temp_list': article_list,
             'column_list': column_list
-	}
+        }
         if article_list:
             return render(request,'column_article.html', context)
         else:
-            return render(request, 'column_article.html', {'msg': '未能搜索结果！'})
+            return render(request, 'column_article.html', {'msg': '未能搜索结果！','column_list': column_list})
     else:
-        return render(request,'column_article.html', {'msg':'未能搜索结果！'})
+        return render(request,'column_article.html', {'msg':'未能搜索结果！','column_list': column_list})
 
 
 # 分页单独提取出来，通用
-def cut_page(pn,obj):
+def cut_page(pn, obj):
     try:
         pn = int(pn)
     except Exception as e:
@@ -123,7 +123,7 @@ def cut_page(pn,obj):
     elif pn < 1:
         pn = 1
 
-        #     判断下方小格子的起始和结束
+    #     判断下方小格子的起始和结束
     if number_pages > 5:
         if pn >= number_pages - 2:
             start = number_pages - 4
@@ -188,8 +188,7 @@ def article(request, article_id):
         'commentform':commentform,
         'content':content,
         'comments':comments,
-        'column_list': column_list
-	})
+        'column_list': column_list})
 
 # 文章评论
 @login_required
@@ -432,7 +431,6 @@ def create_article(request):
             article.save()
             return redirect(reverse('fire:article', kwargs={'article_id':article.id}))
         except Exception as e:
-            print str(e)
             return render(request, 'create_article.html', {'column_list': column_list,'author_list':author_list, 'msg': '服务器繁忙，文章保存失败！'})
 
 
@@ -440,6 +438,7 @@ def create_article(request):
 def user_poll(request):
     user_poll_article = request.user.poll_set.all()
     pn = request.GET.get('pn', 1)
+    column_list = Column.objects.all()
     if user_poll_article:
         temp_list, number_pages, number, pn = cut_page(pn, user_poll_article)
         context = {
@@ -447,16 +446,18 @@ def user_poll(request):
             'numbers': number,
             'num_pages': number_pages,
             'pn': pn,
+            'column_list': column_list
         }
         return render(request, 'user_action_article.html',context)
     else:
-        return render(request, 'user_action_article.html',{'msg':'您还没有点过赞的的文章！'} )
+        return render(request, 'user_action_article.html',{'msg':'您还没有点过赞的的文章！', 'column_list': column_list})
 
 
 @login_required
 def user_keep(request):
     user_keep_article = request.user.article_set.all()
     pn = request.GET.get('pn', 1)
+    column_list = Column.objects.all()
     if user_keep_article:
         temp_list, number_pages, number, pn = cut_page(pn, user_keep_article)
         context = {
@@ -464,15 +465,17 @@ def user_keep(request):
             'numbers': number,
             'num_pages': number_pages,
             'pn': pn,
+            'column_list': column_list
         }
         return render(request, 'column_article.html',context)
     else:
-        return render(request, 'column_article.html',{'msg':'您还没有点过赞的的文章！'} )
+        return render(request, 'column_article.html',{'msg':'您还没有点过赞的的文章！', 'column_list': column_list} )
 
 @login_required
 def user_comment(request):
     user_comment_article = request.user.comment_set.all()
     pn = request.GET.get('pn', 1)
+    column_list = Column.objects.all()
     if user_comment_article:
         temp_list, number_pages, number, pn = cut_page(pn, user_comment_article)
         context = {
@@ -480,10 +483,11 @@ def user_comment(request):
             'numbers': number,
             'num_pages': number_pages,
             'pn': pn,
+            'column_list': column_list
         }
         return render(request, 'user_action_article.html',context)
     else:
-        return render(request, 'user_action_article.html',{'msg':'您还没有点过赞的的文章！'} )
+        return render(request, 'user_action_article.html',{'msg':'您还没有点过赞的的文章！','column_list': column_list} )
 
 
 
