@@ -10,6 +10,7 @@
 @time: 2017/11/20 19:18 
 """  
 import time
+
 from celery import Celery
 
 app = Celery('tasks',backend="amqp", broker="amqp://guest@localhost//")

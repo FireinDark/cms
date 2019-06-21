@@ -11,7 +11,6 @@ tst.py
 *.egg-info
 build
 *.xml
-*.pyc
 
 # My configurations:
 db.ini

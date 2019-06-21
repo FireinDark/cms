@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import views
-
 from django.conf.urls import url
-
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -28,4 +26,3 @@ urlpatterns = [
     url(r'^keep_article/$',views.user_keep, name='user_keep'),
     url(r'^comment_article/$',views.user_comment, name='user_comment'),
 ]
-

@@ -1,23 +1,28 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render,redirect,get_object_or_404,HttpResponse,HttpResponseRedirect
-from django.core.urlresolvers import reverse
-from models import Article,Comment,Poll,NewUser,Column,Author
-from forms import LoginForm,SearchForm,SetInfoForm,RegisterForm,CommentForm
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate,login,logout
-from django.contrib.auth.hashers import make_password
-from django.views.decorators.cache import cache_page
-from django.http import JsonResponse
-from django.core.exceptions import ObjectDoesNotExist
-import markdown2, urlparse
-from django.db.models import Q
-# Create your views here.
-from django.core.paginator import PageNotAnInteger,EmptyPage,InvalidPage,Paginator
-import uuid
 import os
+import urlparse
+import uuid
+
+import markdown2
 from cms import settings
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import make_password
+from django.core.exceptions import ObjectDoesNotExist
+# Create your views here.
+from django.core.paginator import (EmptyPage, InvalidPage, PageNotAnInteger,
+                                   Paginator)
+from django.core.urlresolvers import reverse
+from django.db.models import Q
+from django.http import JsonResponse
+from django.shortcuts import (HttpResponse, HttpResponseRedirect,
+                              get_object_or_404, redirect, render)
+from django.views.decorators.cache import cache_page
+from forms import CommentForm, LoginForm, RegisterForm, SearchForm, SetInfoForm
+from models import Article, Author, Column, Comment, NewUser, Poll
+
 
 # 下载保存图片
 def upload_avatar(file):
@@ -490,9 +495,3 @@ def user_comment(request):
         return render(request, 'user_action_article.html',context)
     else:
         return render(request, 'user_action_article.html',{'msg':'您还没有点过赞的的文章！','column_list': column_list} )
-
-
-
-
-
-

@@ -1,22 +1,18 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models
-
 # Create your models here.
 import datetime
-from django.db import models
-from django.contrib.auth.models import User
-from django.utils.encoding import python_2_unicode_compatible
+
 # 内置兼容python2和python3 __unicode__的装饰器，只是针对__str__方法
 from django.conf import settings
-from django.utils import timezone
-
-# 用于扩展django自带的user库
-from django.contrib.auth.models import AbstractUser
-
-
 from django.contrib.auth import get_user_model
+# 用于扩展django自带的user库
+from django.contrib.auth.models import AbstractUser, User
+from django.db import models
+from django.utils import timezone
+from django.utils.encoding import python_2_unicode_compatible
+
 # def get_sentinel_user():
 #     return get_user_model().objects.get_or_create(username='deleted')[0]
 
@@ -138,6 +134,3 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
-
-
-

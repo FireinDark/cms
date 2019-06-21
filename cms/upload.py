@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
-from django.http import HttpResponse
-from django.conf import settings
-from django.views.decorators.csrf import csrf_exempt
+import datetime as dt
+import json
 import os
 import uuid
-import json
-import datetime as dt
+
+from django.conf import settings
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+
 
 @csrf_exempt
 def upload_image(request, dir_name):
@@ -44,4 +46,3 @@ def image_upload(files, dir_name):
     file_url = settings.MEDIA_URL + relative_path_file + file_name
     open(path_file, 'wb').write(files.file.read())
     return {"error": 0, "url": file_url}
-

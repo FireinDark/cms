@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib import admin
-
-from django.db import models
 from django import forms
-from .models import Comment,Article,Column,NewUser, Author
+from django.contrib import admin
+from django.db import models
+
+from .models import Article, Author, Column, Comment, NewUser
 
 
 class CommentAdmin(admin.ModelAdmin):
@@ -54,8 +54,3 @@ admin.site.register(Column, ColumnAdmin)
 # admin.site.register(NewUser)
 admin.site.register(NewUser, NewUserAdmin)
 admin.site.register(Author, AuthorAdmin)
-
-
-
-
-

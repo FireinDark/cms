@@ -2,6 +2,7 @@
 
 from django import forms
 
+
 class LoginForm(forms.Form):
     uid =forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'id':'uid', 'placeholder':'用户名'}))
     pwd = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control', 'id':'pwd','placeholder':'密码'}))
