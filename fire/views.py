@@ -74,8 +74,6 @@ def index(request):
         'pn': pn,
         'temp_list':article_list
     }
-    for a in article_list:
-        print a.comment_num
     return render(request,'index.html', context)
 
 # 搜索文章
@@ -109,14 +107,12 @@ def cut_page(pn, obj):
     try:
         pn = int(pn)
     except Exception as e:
-        print str(e)
         pn = 1
     pagi = Paginator(obj, 6)
     # 获取某一页记录
     try:
         temp_list = pagi.page(pn)
     except (PageNotAnInteger, EmptyPage, InvalidPage) as e:
-        print str(e)
         pn = 1
         temp_list = pagi.page(pn)
     number_pages = temp_list.paginator.num_pages
@@ -170,7 +166,6 @@ def log_in(request):
 def log_out(request):
     url = request.POST.get('source_url', '/fire/')
     # url = reverse('')
-    print url
     logout(request)
     return redirect(url)
 
@@ -311,7 +306,6 @@ def modify_user(request):
         username = request.POST.get('username')
         email = request.POST.get('email')
         profile = request.POST.get('profile')
-        print username,email,profile
         try:
             avatar = request.FILES.get('avatar')
             res = upload_avatar(avatar)
