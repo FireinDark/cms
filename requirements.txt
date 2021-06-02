@@ -18,7 +18,7 @@ httpie==0.9.9
 idna==2.6
 itypes==1.1.0
 Jinja2==2.9.6
-markdown2==2.3.1
+markdown2==2.4.0
 MarkupSafe==1.0
 olefile==0.44
 pbr==3.1.1
